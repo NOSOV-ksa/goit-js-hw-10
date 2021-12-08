@@ -1,7 +1,9 @@
 import tempateItem from './templates/templateItem.hbs';
+import templatesList from './templates/templatesList.hbs';
 import fetch from './fetchCountries';
 import { debounce } from 'debounce';
 import './css/styles.css';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -29,6 +31,17 @@ function onInput (event) {
                 const markup = tempateItem(country);
                 refs.countryInfo.innerHTML = markup;
             }
+            if (country.length > 1) {
+                const marlup = templatesList(country);
+                refs.countryList.innerHTML = marlup;
+            }
+            if (country.length > 10) {
+                return Notify.info('Too many matches found. Please enter a more specific name.');
+            }
         })
-        .catch();
+        .catch(error());
 }
+
+function error() {
+    return Notify.failure("Oops, there is no country with that name")
+};
