@@ -40,7 +40,7 @@ function onInput (event) {
                 return Notify.info('Too many matches found. Please enter a more specific name.');
             }
         })
-        .catch(error());
+        .catch(error);
 }
 
 function error() {
