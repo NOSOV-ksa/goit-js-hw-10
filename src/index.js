@@ -33,6 +33,8 @@ function onInput (event) {
                 refs.countryList.innerHTML = marlup;
             }
             if (country.length > 10) {
+                refs.countryInfo.innerHTML = '';
+                refs.countryList.innerHTML = '';
                 return Notify.info('Too many matches found. Please enter a more specific name.');
             }
         })
