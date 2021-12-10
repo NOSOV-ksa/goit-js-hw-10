@@ -13,21 +13,17 @@ const refs = {
     countryList: document.querySelector('.country-list'),
     countryInfo: document.querySelector('.country-info')
 };
-
+// console.log(refs.countryInfo.value.event)
 refs.inputSearch.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput (event) {
     event.preventDefault();
-    refs.countryInfo.innerHTML = '';
     const nameCountry = event.target.value.trim();
-    fetch.fetchCountries(nameCountry)
+    console.log(nameCountry);
+    refs.countryInfo.innerHTML = '';
+    refs.countryList.innerHTML = '';
+        fetch.fetchCountries(nameCountry)
         .then((country) => {
-            console.log(country)
-            if (nameCountry === '') {
-                refs.countryInfo.innerHTML = '';
-                refs.countryList.innerHTML = '';
-                return;
-            }
             if (country.length === 1) {
                 const markup = tempateItem(country);
                 refs.countryInfo.innerHTML = markup;
@@ -41,6 +37,10 @@ function onInput (event) {
             }
         })
         .catch(error);
+}
+
+function onClearList() {
+
 }
 
 function error() {
